@@ -21,3 +21,14 @@ userExist(email: any, password: any) {
   console.log("User found:", allUsers[ind]);
   return allUsers[ind].id;
 }
+---
+
+  } else {
+    allUsers = JSON.parse(allUsers);
+    allUsers = allUsers.map((user: any) => {
+      if (!user.role) {
+        user.role = 'read'; // Assign a default role if missing
+      }
+      return user;
+    });
+    localStorage.setItem("allUsers", JSON.stringify(allUsers));
