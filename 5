@@ -1,0 +1,23 @@
+userExist(email: any, password: any) {
+  let allUsers = localStorage.getItem("allUsers");
+  if (!allUsers) {
+    console.log("No users found in localStorage.");
+    return false;
+  }
+  
+  allUsers = JSON.parse(allUsers);
+  console.log("All users:", allUsers);
+
+  let ind = allUsers.findIndex((ele: any) => {
+    console.log(`Checking ${ele.email} against ${email}`);
+    return ele.email.toLowerCase() === email.toLowerCase() && ele.password === password;
+  });
+
+  if (ind === -1) {
+    console.log("User not found");
+    return false;
+  }
+
+  console.log("User found:", allUsers[ind]);
+  return allUsers[ind].id;
+}
