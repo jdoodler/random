@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
+})
+export class NavbarComponent implements OnInit {
+  userName: string | undefined;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    const userId = localStorage.getItem("loggedInUserID");
+
+    if (userId) {
+      this.authService.fetchUsers().subscribe(users => {
+        const currentUser = users.find(user => user.id == userId);
+        if (currentUser) {
+          this.userName = currentUser.userName;
+        }
+      });
+    }
+  }
+}
+_______
+<nav>
+  <ul>
+    <li>Home</li>
+    <li>About</li>
+    <li *ngIf="userName">Welcome, {{ userName }}</li>
+  </ul>
+</nav>
