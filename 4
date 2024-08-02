@@ -1,0 +1,50 @@
+getUserRole() {
+  const userId = localStorage.getItem('loggedInUserId');
+  if (!userId) return null;
+
+  const allUsers: any = JSON.parse(localStorage.getItem('allUsers') || '[]');
+  const user = allUsers.find((u: any) => u.id === +userId);
+  return user ? user.role : null;
+}
+
+----
+
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+
+@Component({
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
+})
+export class NavBarComponent implements OnInit {
+  userRole: string | null = null;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.userRole = this.authService.getUserRole();
+  }
+}
+------
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+
+  <a *ngIf="userRole === 'admin' || userRole === 'write'" routerLink="/create">Create</a>
+
+  <a *ngIf="userRole === 'admin'" routerLink="/user-access">User Access</a>
+</nav>
+----
+login(email: string, password: string): boolean {
+  const userId = this.userExist(email, password);
+  if (userId) {
+    localStorage.setItem('loggedInUserId', userId.toString());
+    return true;
+  }
+  return false;
+}
+
+----
+logout() {
+  localStorage.removeItem('loggedInUserId');
+}
