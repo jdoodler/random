@@ -32,3 +32,40 @@ userExist(email: any, password: any) {
       return user;
     });
     localStorage.setItem("allUsers", JSON.stringify(allUsers));
+----
+
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+  <div class="position-sticky">
+    <div class="list-group list-group-flush mx-3 mt-4">
+      <p
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="homeNavigate()"
+      >
+        <mat-icon>home</mat-icon>
+        <span class="d-none d-md-inline">Dashboard</span>
+      </p>
+
+      <!-- Show this item if userName is 'Admin User' or 'Write User' -->
+      <p
+        *ngIf="userName === 'Admin User' || userName === 'Write User'"
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="openCreate()"
+      >
+        <mat-icon>add</mat-icon>
+        <span class="d-none d-md-inline">Create</span>
+      </p>
+
+      <!-- Show this item if userName is 'Admin User' -->
+      <p
+        *ngIf="userName === 'Admin User'"
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="userAccess()"
+      >
+        <mat-icon>people</mat-icon>
+        <span class="d-none d-md-inline">User Access</span>
+      </p>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
