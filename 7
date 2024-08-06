@@ -8,3 +8,52 @@
         <span class="d-none d-md-inline">Profile</span>
       </p>
     </div>
+
+
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+  <div class="d-flex flex-column h-100">
+    <div class="list-group list-group-flush mx-3 mt-4">
+      <p
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="homeNavigate()"
+      >
+        <mat-icon>home</mat-icon>
+        <span class="d-none d-md-inline">Dashboard</span>
+      </p>
+
+      <p
+        *ngIf="userName === 'Admin User' || userName === 'Write User'"
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="openCreate()"
+      >
+        <mat-icon>add</mat-icon>
+        <span class="d-none d-md-inline">Create</span>
+      </p>
+
+      <p
+        *ngIf="userName === 'Admin User'"
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="userAccess()"
+      >
+        <mat-icon>people</mat-icon>
+        <span class="d-none d-md-inline">User Access</span>
+      </p>
+    </div>
+
+    <!-- Spacer to push the Profile button to the bottom -->
+    <div class="flex-grow-1"></div>
+
+    <!-- Profile Button at the Bottom -->
+    <div class="list-group list-group-flush mx-3 mb-4">
+      <p
+        class="mb-2 list-group-item list-group-item-action py-2 ripple"
+        (click)="openProfile()"
+      >
+        <mat-icon>person</mat-icon>
+        <span class="d-none d-md-inline">Profile</span>
+      </p>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
