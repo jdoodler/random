@@ -57,3 +57,23 @@
 </nav>
 
 <router-outlet></router-outlet>
+
+
+
+
+
+  <!-- About Creator Button at the Bottom -->
+  <div class="about-creator-btn mt-auto mx-3">
+    <p class="list-group-item list-group-item-action py-2 ripple" (click)="openAboutCreator()">
+      <mat-icon>info</mat-icon>
+      <span>About Creator</span>
+    </p>
+  </div>
+
+
+
+  .about-creator-btn {
+  margin-top: auto; /* Push the button to the bottom */
+  padding-bottom: 16px; /* Add some padding at the bottom */
+  text-align: center;
+}
